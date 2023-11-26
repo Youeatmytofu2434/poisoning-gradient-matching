@@ -136,6 +136,7 @@ class Kettle():
             worker_count = 0
         # worker_count = 200
         print(f'Data is loaded with {worker_count} workers.')
+        # return worker_count * 0
         return worker_count
 
     """ CONSTRUCTION METHODS """
@@ -279,7 +280,7 @@ class Kettle():
         """
         if self.args.local_rank is None:
             if self.args.poisonkey is None:
-                self.init_seed = np.random.randint(0, 2**32 - 1)
+                self.init_seed = np.random.randint(low=0, high=2147483647, dtype='int32')
             else:
                 self.init_seed = int(self.args.poisonkey)
             set_random_seed(self.init_seed)
